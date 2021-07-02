@@ -43,18 +43,18 @@ function validatedate(dateString){
                 return false;      
             }else      
             if ((leapYear==true) && (day>29)){      
-                console.log('Invalid date format!');      
+                // console.log('Invalid date format!');      
                 return false;      
             }      
         }      
     }else{      
-        console.log("Invalid date format!");      
+        // console.log("Invalid date format!");      
         return false;      
     }      
     return true;      
 }
-let arr = [["C1", "Customer One", "one@customer.com", "12/11/1977", "AIGHJ75"],
-    ["C2", "Customer Two", "two@customer.com", "12/11/1978", "AIGXXXX54G"]
+let arr = [["C1", "Customer One","one@customer.com", "12/11/1977", "AIGHJ75"],
+    ["C2", "Customer Two", "two@customer.com", "12/11/1878", "AIGXXXX54G"]
 ];
 const groups = arr.map((e, i) => { 
      return i % chunkSize === 0 ? arr.slice(i, i + chunkSize) : null; 
@@ -64,56 +64,47 @@ let finalData=[];
 let success=0;
 let invalid = 0;
 for(let i=0;i<groups.length;i++){
-    // console.log("i",i);
     let currArray = groups[i];
-    // console.log(currArray);
-    let temp = currArray;
-    console.log(currArray.length);
-    let arr1 = [];
     for(let j=0;j<currArray.length;j++){
-        // console.log(temp.length);
-        // console.log("j:",j);
+        if(currArray[j].length === 5){
         let id = currArray[j][0];
         let name = currArray[j][1];
         let email = currArray[j][2];
         let date = currArray[j][3];
         let pan = currArray[j][4];
-        let arr2 = []
-        console.log(typeof(id),typeof(name),typeof(email),typeof(date),typeof(pan));
-        // console.log(pan,pan.length);
         let flag = true;
-        if(id===""){
+        if(id===""||id===undefined || id===null){
             flag = false;
-            arr2.push("id is not valid")
+            currArray[j].push("id is not valid")
         }
-        if(name===""){
+        if(name==="" || name===undefined || id === null){
             flag = false;
-            arr2.push("name is not valid")
+            currArray[j].push("name is not valid")
         }
         //email validate
         if(!validateEmail(email)){
             flag = false;
-            arr2.push("email is invalid")
+            currArray[j].push("email is invalid")
         }
         if(!validatedate(date)){
             flag = false;
-            arr2.push("date is not valid")
+            currArray[j].push("date is not valid")
         }
         if(pan.length !== 10){
             flag = false;
-            arr2.push("pan length must be 10")
+            currArray[j].push("pan length must be 10")
         }
         if(flag){
             success++;
         }else{
             invalid++;
         }
-        currArray[j].push(arr2);
+    }else{
+        currArray[j].push("Data is incomplete")    
+    }
     }
     finalData.push(currArray);
 }
 console.log("success:",success);
 console.log("Invalid:",invalid);
-for(let i=0;i<finalData.length;i++){
-    console.log(finalData[i]);
-}
+console.log(finalData);
