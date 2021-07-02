@@ -1,5 +1,4 @@
 
-
 // [
 //     [C1, Customer One, one@customer.com, '17-09-1976', 'AIGHJ7'],
 //   [C2, Customer Two, two@customer.com, '12-11-1991', 'AIGXXXX54G']
@@ -70,7 +69,7 @@ for(let i=0;i<groups.length;i++){
     // console.log(currArray);
     let temp = currArray;
     console.log(currArray.length);
-    let arr2 = [];
+    let arr1 = [];
     for(let j=0;j<currArray.length;j++){
         // console.log(temp.length);
         // console.log("j:",j);
@@ -79,6 +78,7 @@ for(let i=0;i<groups.length;i++){
         let email = currArray[j][2];
         let date = currArray[j][3];
         let pan = currArray[j][4];
+        let arr2 = []
         console.log(typeof(id),typeof(name),typeof(email),typeof(date),typeof(pan));
         // console.log(pan,pan.length);
         let flag = true;
@@ -108,10 +108,12 @@ for(let i=0;i<groups.length;i++){
         }else{
             invalid++;
         }
+        currArray[j].push(arr2);
     }
-    currArray.push(arr2);
     finalData.push(currArray);
 }
 console.log("success:",success);
 console.log("Invalid:",invalid);
-console.log(finalData);
+for(let i=0;i<finalData.length;i++){
+    console.log(finalData[i]);
+}
